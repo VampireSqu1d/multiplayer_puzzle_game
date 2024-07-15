@@ -6,9 +6,7 @@ extends Node2D
 @export var is_locked: = true
 
 
-func _on_test_interact(state):
-	if state:
-		_on_interactible_interacted()
+
 
 func _on_interactible_interacted():
 	if is_locked:

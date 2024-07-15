@@ -1,4 +1,4 @@
-[gd_scene load_steps=66 format=3 uid="uid://cskljaeex47kn"]
+[gd_scene load_steps=67 format=3 uid="uid://cskljaeex47kn"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_7pw7v"]
 [ext_resource type="Texture2D" uid="uid://b2bad2gagymed" path="res://assets/characters/knight/idle/0_Hell_Knight_Idle_000.png" id="1_o4yng"]
@@ -285,6 +285,9 @@ animations = [{
 "speed": 24.0
 }]
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_7ef2c"]
+size = Vector2(200, 500)
+
 [sub_resource type="CapsuleShape2D" id="CapsuleShape2D_fkesl"]
 radius = 15.0
 height = 54.0
@@ -316,11 +319,21 @@ sprite_frames = SubResource("SpriteFrames_8mbga")
 animation = &"double_jump_start"
 autoplay = "idle"
 
+[node name="InteractionHandler" type="Area2D" parent="AnimatedSprite2D"]
+collision_layer = 0
+collision_mask = 5
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="AnimatedSprite2D/InteractionHandler"]
+position = Vector2(200, 50)
+shape = SubResource("RectangleShape2D_7ef2c")
+
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-position = Vector2(0, -27)
+position = Vector2(-3, -27)
 shape = SubResource("CapsuleShape2D_fkesl")
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_3qoyr")
 
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
+[connection signal="area_entered" from="AnimatedSprite2D/InteractionHandler" to="." method="_on_interaction_handler_area_entered"]
+[connection signal="area_exited" from="AnimatedSprite2D/InteractionHandler" to="." method="_on_interaction_handler_area_exited"]

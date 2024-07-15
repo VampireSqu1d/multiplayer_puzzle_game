@@ -14,6 +14,7 @@ var owner_id = 1
 var jump_count = 0
 var camera_instance: Camera2D
 var state = PlayerState.IDLE
+var current_interactable
 
 enum PlayerState {
 	IDLE,
@@ -52,6 +53,11 @@ func _physics_process(_delta: float) -> void:
 	
 	velocity.x = horizontal_input * moving_speed
 	velocity.y += gravity
+	
+	if Input.is_action_just_pressed("interact"):
+		if current_interactable != null:
+			current_interactable.interact.rpc_id(1)
+	
 	
 	handle_movement_state()
 	
@@ -128,3 +134,20 @@ func update_camera_pos():
 func _on_animated_sprite_2d_animation_finished() -> void:
 	if state == PlayerState.JUMPING:
 		player_sprite.play("jump")
+
+
+func _on_interaction_handler_area_entered(area: Area2D) -> void:
+	current_interactable = area
+
+
+func _on_interaction_handler_area_exited(area: Area2D) -> void:
+	if current_interactable == area:
+		current_interactable = null
+
+
+
+
+
+
+
+
