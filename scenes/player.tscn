@@ -310,7 +310,7 @@ script = ExtResource("1_7pw7v")
 player_camera = ExtResource("2_eyvy3")
 camera_height = 240
 player_sprite = NodePath("AnimatedSprite2D")
-max_jumps = 4
+max_jumps = 2
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 position = Vector2(6.10352e-05, -30)
