@@ -1,6 +1,7 @@
-[gd_scene load_steps=5 format=3 uid="uid://yox0mb1r31tv"]
+[gd_scene load_steps=7 format=3 uid="uid://yox0mb1r31tv"]
 
 [ext_resource type="Texture2D" uid="uid://rglygid7fsot" path="res://assets/objects/Wooden_Crate.png" id="1_b5np2"]
+[ext_resource type="Script" path="res://scenes/interactables/pushable_objects/pushable_object.gd" id="1_wxubb"]
 
 [sub_resource type="PhysicsMaterial" id="PhysicsMaterial_5t1qk"]
 friction = 0.5
@@ -18,10 +19,14 @@ properties/1/path = NodePath(".:rotation")
 properties/1/spawn = true
 properties/1/replication_mode = 1
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_mtodo"]
+size = Vector2(70, 70)
+
 [node name="PushableCrate" type="RigidBody2D"]
 collision_layer = 16
 collision_mask = 19
 physics_material_override = SubResource("PhysicsMaterial_5t1qk")
+script = ExtResource("1_wxubb")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]
 scale = Vector2(0.5, 0.5)
@@ -33,3 +38,10 @@ shape = SubResource("RectangleShape2D_kqv3n")
 
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_e6mr5")
+
+[node name="Area2D" type="Area2D" parent="."]
+collision_layer = 16
+collision_mask = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+shape = SubResource("RectangleShape2D_mtodo")
