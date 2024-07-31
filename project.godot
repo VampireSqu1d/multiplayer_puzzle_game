@@ -11,6 +11,7 @@ config_version=5
 [application]
 
 config/name="Godot Multiplayer Puzzle Game"
+config/tags=PackedStringArray("2d", "gamedev.tv", "multiplayer")
 run/main_scene="res://scenes/levels/menu/menu.tscn"
 config/features=PackedStringArray("4.2", "Forward Plus")
 run/max_fps=60

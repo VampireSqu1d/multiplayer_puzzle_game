@@ -1,4 +1,4 @@
-[gd_scene load_steps=67 format=3 uid="uid://cskljaeex47kn"]
+[gd_scene load_steps=68 format=3 uid="uid://cskljaeex47kn"]
 
 [ext_resource type="Script" path="res://scripts/player.gd" id="1_7pw7v"]
 [ext_resource type="Texture2D" uid="uid://b2bad2gagymed" path="res://assets/characters/knight/idle/0_Hell_Knight_Idle_000.png" id="1_o4yng"]
@@ -62,6 +62,7 @@
 [ext_resource type="Texture2D" uid="uid://dhe8hiuj10het" path="res://assets/characters/knight/walk/0_Hell_Knight_Walking_021.png" id="58_im8vd"]
 [ext_resource type="Texture2D" uid="uid://cy8tvhbhy2xlp" path="res://assets/characters/knight/walk/0_Hell_Knight_Walking_022.png" id="59_e8p4v"]
 [ext_resource type="Texture2D" uid="uid://dqgyc1yfsaufd" path="res://assets/characters/knight/walk/0_Hell_Knight_Walking_023.png" id="60_6n665"]
+[ext_resource type="PackedScene" uid="uid://b8jmp1lxskg64" path="res://scenes/player_finder.tscn" id="63_vbnju"]
 
 [sub_resource type="SpriteFrames" id="SpriteFrames_8mbga"]
 animations = [{
@@ -293,23 +294,24 @@ radius = 15.0
 height = 54.0
 
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_3qoyr"]
-properties/0/path = NodePath(".:position")
+properties/0/path = NodePath("AnimatedSprite2D:animation")
 properties/0/spawn = true
 properties/0/replication_mode = 1
-properties/1/path = NodePath("AnimatedSprite2D:animation")
+properties/1/path = NodePath("AnimatedSprite2D:scale")
 properties/1/spawn = true
 properties/1/replication_mode = 1
-properties/2/path = NodePath("AnimatedSprite2D:scale")
+properties/2/path = NodePath(".:target_pos")
 properties/2/spawn = true
 properties/2/replication_mode = 1
 
-[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("player_sprite")]
+[node name="Player" type="CharacterBody2D" node_paths=PackedStringArray("player_sprite", "player_finder")]
 collision_layer = 2
 collision_mask = 19
 script = ExtResource("1_7pw7v")
 player_camera = ExtResource("2_eyvy3")
 camera_height = 240
 player_sprite = NodePath("AnimatedSprite2D")
+player_finder = NodePath("PlayerFinder")
 max_jumps = 2
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
@@ -334,6 +336,14 @@ shape = SubResource("CapsuleShape2D_fkesl")
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_3qoyr")
 
+[node name="PlayerFinder" parent="." instance=ExtResource("63_vbnju")]
+visible = false
+position = Vector2(0, -27)
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="."]
+
 [connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
 [connection signal="area_entered" from="AnimatedSprite2D/InteractionHandler" to="." method="_on_interaction_handler_area_entered"]
 [connection signal="area_exited" from="AnimatedSprite2D/InteractionHandler" to="." method="_on_interaction_handler_area_exited"]
+[connection signal="screen_entered" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_entered"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

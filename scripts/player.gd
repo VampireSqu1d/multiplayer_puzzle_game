@@ -2,12 +2,21 @@ extends CharacterBody2D
 
 @export var player_camera: PackedScene
 @export var camera_height: int = -132
+
 @export var player_sprite: AnimatedSprite2D
+@export var player_finder: Node2D
+
 @export var moving_speed:  float =  300.0
 @export var gravity: float = 40
 @export var jump_stregth: float = 600.0
 @export var max_jumps: int = 1
 @export var push_force: = 10
+
+
+@export var target_pos: Vector2 = Vector2.INF
+
+
+
 @onready var initial_sprite_scale = player_sprite.scale
 
 var owner_id = 1
@@ -35,10 +44,11 @@ func _enter_tree() -> void:
 	set_up_camera()
 
 
-func _process(_delta: float) -> void:
+func _process(delta: float) -> void:
 	if multiplayer.multiplayer_peer == null:
 		return
 	if owner_id != multiplayer.get_unique_id():
+		global_position = HelperFunctions.client_interpolate(global_position, target_pos, delta)
 		return
 	update_camera_pos()
 
@@ -62,6 +72,7 @@ func _physics_process(_delta: float) -> void:
 	handle_movement_state()
 	
 	move_and_slide()
+	target_pos = global_position
 	
 	for i in get_slide_collision_count():
 		var collision = get_slide_collision(i)
@@ -137,8 +148,6 @@ func update_camera_pos():
 	camera_instance.global_position = global_position
 
 
-
-
 func _on_animated_sprite_2d_animation_finished() -> void:
 	if state == PlayerState.JUMPING:
 		player_sprite.play("jump")
@@ -153,9 +162,9 @@ func _on_interaction_handler_area_exited(area: Area2D) -> void:
 		current_interactable = null
 
 
+func _on_visible_on_screen_notifier_2d_screen_entered() -> void:
+	player_finder.visible = false
 
 
-
-
-
-
+func _on_visible_on_screen_notifier_2d_screen_exited() -> void:
+	player_finder.visible = true
