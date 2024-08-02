@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://d1gmi518u7dp3"]
+[gd_scene load_steps=8 format=3 uid="uid://d1gmi518u7dp3"]
 
 [ext_resource type="Texture2D" uid="uid://bg27k5sblx533" path="res://assets/objects/Door_01.png" id="1_1s1a1"]
 [ext_resource type="Script" path="res://scenes/interactables/key_door/key_door.gd" id="1_lljpo"]
@@ -12,13 +12,17 @@ gradient = SubResource("Gradient_6u2oo")
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_r0tnl"]
 size = Vector2(99.5, 147.5)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_1gub7"]
+size = Vector2(70, 127.75)
+
 [sub_resource type="SceneReplicationConfig" id="SceneReplicationConfig_gfc0d"]
 properties/0/path = NodePath(".:is_open")
 properties/0/spawn = true
 properties/0/replication_mode = 2
 
-[node name="KeyDoor" type="Node2D"]
+[node name="KeyDoor" type="Node2D" node_paths=PackedStringArray("exit_area")]
 script = ExtResource("1_lljpo")
+exit_area = NodePath("ExitArea")
 
 [node name="DoorClosed" type="Sprite2D" parent="."]
 z_index = -20
@@ -41,8 +45,18 @@ collision_mask = 9
 position = Vector2(0, -75)
 shape = SubResource("RectangleShape2D_r0tnl")
 
+[node name="ExitArea" type="Area2D" parent="."]
+collision_layer = 0
+collision_mask = 2
+monitoring = false
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ExitArea"]
+position = Vector2(1, -65.125)
+shape = SubResource("RectangleShape2D_1gub7")
+
 [node name="MultiplayerSynchronizer" type="MultiplayerSynchronizer" parent="."]
 replication_config = SubResource("SceneReplicationConfig_gfc0d")
 
 [connection signal="area_entered" from="Area2D" to="." method="_on_area_2d_area_entered"]
+[connection signal="body_entered" from="ExitArea" to="." method="_on_exit_area_body_entered"]
 [connection signal="delta_synchronized" from="MultiplayerSynchronizer" to="." method="_on_multiplayer_synchronizer_delta_synchronized"]

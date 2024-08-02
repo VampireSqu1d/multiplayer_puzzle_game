@@ -36,8 +36,11 @@ func _on_join_button_pressed() -> void:
 func change_level(scene: PackedScene):
 	for c in level_holder.get_children():
 		level_holder.remove_child(c)
+		c.level_completed.disconnect(_on_level_completed)
 		c.queue_free()
-	level_holder.add_child(scene.instantiate())
+	var new_level = scene.instantiate()
+	level_holder.add_child(new_level)
+	new_level.level_completed.connect(_on_level_completed)
 
 func _on_connection_failed():
 	status_label.text = "Failed To Connect :C"
@@ -51,3 +54,9 @@ func _on_connected_to_server():
 @rpc("call_local", "authority", "reliable")
 func hide_menu():
 	ui.hide()
+
+
+func _on_level_completed():
+	call_deferred("change_level", level_scene)
+
+

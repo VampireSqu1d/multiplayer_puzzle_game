@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://bqy7xo77tnjto"]
+
+[ext_resource type="PackedScene" uid="uid://cskljaeex47kn" path="res://scenes/player/player.tscn" id="1_bh4lp"]
+[ext_resource type="SpriteFrames" uid="uid://bg3ndhqoroemp" path="res://scenes/player/elf/elf.tres" id="2_y6kt1"]
+
+[node name="elf" instance=ExtResource("1_bh4lp")]
+moving_speed = 450.0
+max_jumps = 4
+
+[node name="AnimatedSprite2D" parent="." index="0"]
+sprite_frames = ExtResource("2_y6kt1")
+animation = &"idle"
+
+[editable path="PlayerFinder"]

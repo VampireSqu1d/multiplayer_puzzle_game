@@ -1,9 +1,10 @@
-[gd_scene load_steps=14 format=3 uid="uid://c7y8ecxtqr8kj"]
+[gd_scene load_steps=15 format=3 uid="uid://c7y8ecxtqr8kj"]
 
 [ext_resource type="Texture2D" uid="uid://bja0wl8tcw71c" path="res://assets/backgrounds/background_01.png" id="1_l7cie"]
 [ext_resource type="Script" path="res://scenes/levels/level.gd" id="1_wada8"]
 [ext_resource type="Texture2D" uid="uid://chwbcf7n2ajtp" path="res://assets/platforms/Platformer_spritesheet.png" id="1_x4i6v"]
-[ext_resource type="PackedScene" uid="uid://cskljaeex47kn" path="res://scenes/player.tscn" id="2_gplsh"]
+[ext_resource type="PackedScene" uid="uid://bqy7xo77tnjto" path="res://scenes/player/elf/elf.tscn" id="2_exibl"]
+[ext_resource type="PackedScene" uid="uid://s7xhdpfvl0a6" path="res://scenes/player/knight/knight_char.tscn" id="3_aw4ba"]
 [ext_resource type="Texture2D" uid="uid://bujx43rcy5b85" path="res://assets/backgrounds/background_02.png" id="3_nvfsr"]
 [ext_resource type="PackedScene" uid="uid://b2s002up22ea" path="res://scenes/interactables/pressure_plate/pressure_plate.tscn" id="6_1kiqu"]
 [ext_resource type="PackedScene" uid="uid://hvkbcue7esls" path="res://scenes/interactables/door/Door.tscn" id="7_asbh5"]
@@ -74,11 +75,12 @@ physics_layer_0/collision_layer = 1
 physics_layer_0/collision_mask = 0
 sources/0 = SubResource("TileSetAtlasSource_m8kt1")
 
-[node name="Level_01" type="Node2D" node_paths=PackedStringArray("players_container", "spawn_points")]
+[node name="Level_01" type="Node2D" node_paths=PackedStringArray("players_container", "spawn_points", "key_door")]
 script = ExtResource("1_wada8")
 players_container = NodePath("-----Players-----/PlayerContainer")
-player_scene = ExtResource("2_gplsh")
+player_scenes = Array[PackedScene]([ExtResource("2_exibl"), ExtResource("3_aw4ba")])
 spawn_points = [NodePath("-----Players-----/SpawnPoint_01"), NodePath("-----Players-----/SpawnPoint_02"), NodePath("-----Players-----/SpawnPoint_03"), NodePath("-----Players-----/SpawnPoint_04")]
+key_door = NodePath("------Interactables-------/KeyDoor")
 
 [node name="------Enviorment-------" type="Node" parent="."]
 
@@ -139,9 +141,9 @@ position = Vector2(412, 161)
 [node name="PlayerContainer" type="Node2D" parent="-----Players-----"]
 
 [node name="PlayerSpawner" type="MultiplayerSpawner" parent="-----Players-----/PlayerContainer"]
-_spawnable_scenes = PackedStringArray("res://scenes/player.tscn")
+_spawnable_scenes = PackedStringArray("res://scenes/player/knight/knight_char.tscn", "res://scenes/player/elf/elf.tscn")
 spawn_path = NodePath("..")
-spawn_limit = 5
+spawn_limit = 4
 
 [node name="SpawnPoint_01" type="Marker2D" parent="-----Players-----"]
 position = Vector2(622, 333)
