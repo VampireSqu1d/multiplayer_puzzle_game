@@ -1,6 +1,6 @@
 [gd_scene load_steps=6 format=3 uid="uid://hvkbcue7esls"]
 
-[ext_resource type="Script" path="res://scenes/interactables/door/Door.gd" id="1_5g8kx"]
+[ext_resource type="Script" uid="uid://c6v3adiurfggy" path="res://scenes/interactables/door/Door.gd" id="1_5g8kx"]
 [ext_resource type="Texture2D" uid="uid://5yag2v3dwsdo" path="res://assets/objects/Pillar_02.png" id="2_xcr7l"]
 [ext_resource type="Texture2D" uid="uid://bg27k5sblx533" path="res://assets/objects/Door_01.png" id="3_iw2dd"]
 

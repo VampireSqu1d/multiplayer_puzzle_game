@@ -13,7 +13,7 @@ config_version=5
 config/name="Godot Multiplayer Puzzle Game"
 config/tags=PackedStringArray("2d", "gamedev.tv", "multiplayer")
 run/main_scene="res://scenes/levels/menu/menu.tscn"
-config/features=PackedStringArray("4.3", "Forward Plus")
+config/features=PackedStringArray("4.4", "Forward Plus")
 run/max_fps=60
 config/icon="res://icon.svg"
 
@@ -26,10 +26,6 @@ LobbyHelper="*res://addons/w4gd/plugin/nodes/w4_lobby_helper.gd"
 [display]
 
 window/size/resizable=false
-
-[editor_plugins]
-
-enabled=PackedStringArray("res://addons/w4gd/plugin/plugin.cfg")
 
 [input]
 
@@ -64,5 +60,4 @@ interact={
 
 [w4games]
 
-w4rm/url="https://gamedev-tutorial.beta-01.w4games.cloud/"
 w4rm/key="eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE3MzU2ODYwMDAsImlhdCI6MTY0MDk5MTYwMCwicm9sZSI6ImFub24ifQ.D2heq5z-Kt9xChN8eHTm2vFgqSOX2EGpcACzRdbwbT4"

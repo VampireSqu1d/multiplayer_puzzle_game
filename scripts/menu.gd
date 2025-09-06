@@ -10,13 +10,13 @@ extends Node
 
 @export var level_scene: PackedScene
 
-# Called when the node enters the scene tree for the first time.
+
 func _ready() -> void:
-	#multiplayer.connection_failed.connect(_on_connection_failed)
-	#multiplayer.connected_to_server.connect(_on_connected_to_server)
+	multiplayer.connection_failed.connect(_on_connection_failed)
+	multiplayer.connected_to_server.connect(_on_connected_to_server)
 	
 	multiplayer.peer_disconnected.connect(_on_lobby_left)
-	LobbyHelper.lobby_webrtc_peers_ready.connect(_on_peers_ready)
+	#LobbyHelper.lobby_webrtc_peers_ready.connect(_on_peers_ready)
 	
 	leave_ui.hide()
 
@@ -29,10 +29,10 @@ func _on_host_button_pressed() -> void:
 
 
 func _on_start_button_pressed() -> void:
-	LobbyHelper.lobby.state = LobbyHelper.LobbyState.SEALED
-	LobbyHelper.lobby.save().async()
-	#hide_menu.rpc()
-	#change_level.call_deferred(level_scene)
+	#LobbyHelper.lobby.state = LobbyHelper.LobbyState.SEALED
+	#LobbyHelper.lobby.save().async()
+	hide_menu.rpc()
+	change_level.call_deferred(level_scene)
 
 
 func _on_join_button_pressed() -> void:
@@ -77,13 +77,13 @@ func _on_peers_ready():
 
 func _on_leave_button_pressed() -> void:
 	if is_multiplayer_authority():
-		LobbyHelper.lobby.state = LobbyHelper.LobbyState.DONE
-		LobbyHelper.lobby.save().async()
+		#LobbyHelper.lobby.state = LobbyHelper.LobbyState.DONE
+		#LobbyHelper.lobby.save().async()
 		for c in level_holder.get_children():
 			level_holder.remove_child(c)
 			c.level_completed.disconnect(_on_level_completed)
 			c.queue_free()
-	LobbyHelper._set_lobby(null)
+	#LobbyHelper._set_lobby(null)
 	multiplayer.multiplayer_peer = null
 	return_to_menu()
 

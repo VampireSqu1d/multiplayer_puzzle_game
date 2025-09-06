@@ -1,7 +1,7 @@
 [gd_scene load_steps=6 format=3 uid="uid://cnjr7xvc73c3e"]
 
-[ext_resource type="Script" path="res://addons/w4gd/plugin/editor/w4_dashboard.gd" id="1_7w01k"]
-[ext_resource type="Script" path="res://addons/w4gd/plugin/editor/w4_editor_auth_helper.gd" id="2_omphg"]
+[ext_resource type="Script" uid="uid://cmis36ejhemyt" path="res://addons/w4gd/plugin/editor/w4_dashboard.gd" id="1_7w01k"]
+[ext_resource type="Script" uid="uid://cs5d5gb8wxgrr" path="res://addons/w4gd/plugin/editor/w4_editor_auth_helper.gd" id="2_omphg"]
 [ext_resource type="PackedScene" uid="uid://cn1q0mu6r3i2s" path="res://addons/w4gd/plugin/editor/w4_workspace_settings.tscn" id="3_2oou2"]
 [ext_resource type="PackedScene" uid="uid://urrb5ctn6svw" path="res://addons/w4gd/plugin/editor/w4_server_uploader.tscn" id="4_41mws"]
 [ext_resource type="PackedScene" uid="uid://bhurh6h2vlnb2" path="res://addons/w4gd/plugin/editor/w4_editor_database.tscn" id="4_d1kcc"]

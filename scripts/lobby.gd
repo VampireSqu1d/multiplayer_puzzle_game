@@ -8,46 +8,60 @@ signal server_disconnected
 signal connection_failed
 
 const PORT = 7000
-const MAX_CONNECTION = 3
+const MAX_CONNECTIONS = 3
 
 var players = {}
-var player_info = {"name": "player 1"}
+var player_info: = {"name": "player 1"}
 
-var uuid = W4Utils.UUIDGenerator.new()
+var lan_mode: = true
+var _uuid = W4Utils.UUIDGenerator.new()
 
 func _ready() -> void:
-	#multiplayer.peer_connected.connect(_on_player_connected)
-	#multiplayer.peer_disconnected.connect(_on_peer_disconnected)
-	#multiplayer.server_disconnected.connect(_on_connection_failed)
-	#multiplayer.connection_failed.connect(_on_server_disconnected)
+	multiplayer.peer_connected.connect(_on_player_connected)
+	multiplayer.peer_disconnected.connect(_on_peer_disconnected)
+	multiplayer.server_disconnected.connect(_on_connection_failed)
+	multiplayer.connection_failed.connect(_on_server_disconnected)
 	
-	LobbyHelper.lobby_created.connect(_on_lobby_created)
-	LobbyHelper.lobby_joined.connect(_on_lobby_joined)
-	
-	var login_result = await W4GD.auth.login_device(uuid.generate_v4(), uuid.generate_v4()).async()
-	
-	if login_result.is_error():
-		print(login_result.as_error().message)
-	else:
-		var user_info = await W4GD.auth.get_user().async()
+	if !lan_mode:
+		LobbyHelper.lobby_created.connect(_on_lobby_created)
+		LobbyHelper.lobby_joined.connect(_on_lobby_joined)
 		
-		print("logged in as: ", user_info.email)
+		var login_result = await W4GD.auth.login_device(_uuid.generate_v4(), _uuid.generate_v4()).async()
+		
+		if login_result.is_error():
+			print(login_result.as_error().message)
+		else:
+			var user_info = await W4GD.auth.get_user().async()
+			
+			print("logged in as: ", user_info.email)
 
 
-func create_game():
-	await LobbyHelper.create_lobby(LobbyHelper.LobbyType.WEBRTC)
-	
-	#players[1] = player_info
-	#player_connected.emit(1, player_info)
+func create_game() -> Error:
+	if !lan_mode:
+		await LobbyHelper.create_lobby(LobbyHelper.LobbyType.WEBRTC)
+	else:
+		var peer: = ENetMultiplayerPeer.new()
+		var error: = peer.create_server(PORT, MAX_CONNECTIONS)
+		
+		if error:
+			return error
+		
+		multiplayer.multiplayer_peer = peer
+		players[1] = player_info
+		player_connected.emit(1, player_info)
+	return OK
 
 
-func join_game(address):
-	await LobbyHelper.join_lobby(address)
-	#var peer = ENetMultiplayerPeer.new()
-	#var error = peer.create_client(address, PORT)
-	#if error:
-		#return error
-	#multiplayer.multiplayer_peer = peer
+func join_game(address) -> Error:
+	if !lan_mode:
+		await LobbyHelper.join_lobby(address)
+	else:
+		var peer: = ENetMultiplayerPeer.new()
+		var error: = peer.create_client(address, PORT)
+		if error:
+			return error
+		multiplayer.multiplayer_peer = peer
+	return OK
 
 
 func _on_player_connected(id):
@@ -61,26 +75,25 @@ func _register_player(new_player_info):
 	player_connected.emit(new_player_id, new_player_info)
 
 
-func _on_peer_disconnected(id):
+func _on_peer_disconnected(id) -> void:
 	players.erase(id)
 	player_connected.emit(id)
 
 
-func _on_connected_to_server():
+func _on_connected_to_server() -> void:
 	var peer_id = multiplayer.get_unique_id()
 	players[peer_id] = player_info
 	player_connected.emit(peer_id, player_info)
 	
 
-func _on_connection_failed():
+func _on_connection_failed() -> void:
 	multiplayer.multiplayer_peer = null
 
 
-func _on_server_disconnected():
+func _on_server_disconnected() -> void:
 	multiplayer.multiplayer_peer = null
 	players.clear()
 	server_disconnected.emit()
-	pass
 
 
 func _on_lobby_created(lobby):

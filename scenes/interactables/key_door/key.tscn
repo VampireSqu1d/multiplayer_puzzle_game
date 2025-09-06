@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=3 uid="uid://dyqesx7uebklk"]
 
-[ext_resource type="Script" path="res://scenes/interactables/key_door/key.gd" id="1_rqlh4"]
+[ext_resource type="Script" uid="uid://b5verogdbcctx" path="res://scenes/interactables/key_door/key.gd" id="1_rqlh4"]
 [ext_resource type="Texture2D" uid="uid://d1tvhhykcnhqj" path="res://assets/objects/Key_01.png" id="1_u6uw1"]
 
 [sub_resource type="CircleShape2D" id="CircleShape2D_n6bwy"]

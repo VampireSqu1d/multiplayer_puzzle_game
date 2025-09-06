@@ -47,7 +47,7 @@ func add_player(id):
 func delete_player(id):
 	if not players_container.has_node(str(id)):
 		return
-	players_container.get_node(id).queue_free()
+	players_container.find_child(str(id)).queue_free()
 
 
 func get_spawn_point():

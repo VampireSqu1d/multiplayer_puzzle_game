@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://cn1q0mu6r3i2s"]
 
-[ext_resource type="Script" path="res://addons/w4gd/plugin/editor/w4_workspace_settings.gd" id="1_tvjrk"]
+[ext_resource type="Script" uid="uid://30tylblitjp6" path="res://addons/w4gd/plugin/editor/w4_workspace_settings.gd" id="1_tvjrk"]
 
 [node name="WorkspaceSettings" type="Control"]
 layout_mode = 3

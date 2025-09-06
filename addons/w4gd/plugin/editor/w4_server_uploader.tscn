@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://urrb5ctn6svw"]
 
-[ext_resource type="Script" path="res://addons/w4gd/plugin/editor/w4_server_uploader.gd" id="1_xmegm"]
+[ext_resource type="Script" uid="uid://b6d1ayii6jqc7" path="res://addons/w4gd/plugin/editor/w4_server_uploader.gd" id="1_xmegm"]
 
 [node name="W4ServerUploader" type="Control"]
 layout_mode = 3

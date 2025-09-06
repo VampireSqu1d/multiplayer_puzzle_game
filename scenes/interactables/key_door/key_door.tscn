@@ -1,7 +1,7 @@
 [gd_scene load_steps=8 format=3 uid="uid://d1gmi518u7dp3"]
 
 [ext_resource type="Texture2D" uid="uid://bg27k5sblx533" path="res://assets/objects/Door_01.png" id="1_1s1a1"]
-[ext_resource type="Script" path="res://scenes/interactables/key_door/key_door.gd" id="1_lljpo"]
+[ext_resource type="Script" uid="uid://dd8r72g6xwu88" path="res://scenes/interactables/key_door/key_door.gd" id="1_lljpo"]
 
 [sub_resource type="Gradient" id="Gradient_6u2oo"]
 colors = PackedColorArray(0, 0, 0, 1, 0, 0, 0, 1)

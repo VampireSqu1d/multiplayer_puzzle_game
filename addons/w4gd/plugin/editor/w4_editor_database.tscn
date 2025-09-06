@@ -1,6 +1,6 @@
 [gd_scene load_steps=2 format=3 uid="uid://bhurh6h2vlnb2"]
 
-[ext_resource type="Script" path="res://addons/w4gd/plugin/editor/w4_editor_database.gd" id="1_cv3uf"]
+[ext_resource type="Script" uid="uid://bne0jc2tkfru7" path="res://addons/w4gd/plugin/editor/w4_editor_database.gd" id="1_cv3uf"]
 
 [node name="Database" type="Control"]
 layout_mode = 3

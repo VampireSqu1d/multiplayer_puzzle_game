@@ -1,7 +1,7 @@
 [gd_scene load_steps=5 format=3 uid="uid://cihbklnjfktl6"]
 
 [ext_resource type="Texture2D" uid="uid://cu3ucp0ocryit" path="res://assets/objects/Pillar_01.png" id="1_lrmin"]
-[ext_resource type="Script" path="res://scenes/interactables/Bridge/Bridge.gd" id="1_ugbvm"]
+[ext_resource type="Script" uid="uid://b2qfmfrpgte1r" path="res://scenes/interactables/Bridge/Bridge.gd" id="1_ugbvm"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_clkxn"]
 size = Vector2(320, 38)

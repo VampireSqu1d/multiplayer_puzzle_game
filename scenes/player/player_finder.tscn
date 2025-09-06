@@ -1,7 +1,7 @@
 [gd_scene load_steps=4 format=3 uid="uid://b8jmp1lxskg64"]
 
 [ext_resource type="Texture2D" uid="uid://5ndk5ribdpk4" path="res://assets/characters/character_marker/Player_Finder.png" id="1_bgva4"]
-[ext_resource type="Script" path="res://scripts/player_finder.gd" id="1_x7nex"]
+[ext_resource type="Script" uid="uid://c3avdfamqmhil" path="res://scripts/player_finder.gd" id="1_x7nex"]
 [ext_resource type="Texture2D" uid="uid://bkteqb4eah0qa" path="res://assets/characters/elf/idle/0_Dark_Elves_Idle_001.png" id="2_x5fur"]
 
 [node name="PlayerFinder" type="Node2D" node_paths=PackedStringArray("pivot", "icon")]
